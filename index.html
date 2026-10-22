@@ -10,9 +10,11 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bloqueado">
-<div class="marco" aria-hidden="true"></div>
 <div id="mariposas" aria-hidden="true"></div>
 <audio id="musica" src="assets/audio/cancion.mp3" loop preload="auto"></audio>
+<audio id="magia" src="assets/audio/magia.mp3" preload="auto"></audio>
+<div id="brillos" aria-hidden="true"></div>
+<div id="destello" aria-hidden="true"><p class="destello-texto">Estás invitado</p></div> <!-- texto de la pantalla blanca: edítalo aquí -->
 
 <!-- 1. SOBRE (el marco dorado de esta pantalla se dibuja desde css/styles.css, #intro::before) -->
 <section id="intro">
@@ -21,10 +23,6 @@
   <h1 class="nombre">Ariadna Raquel</h1>
   <p class="apellidos">López</p>
   <div id="sobre">
-    <div class="interior"></div>
-    <div class="carta"><p class="carta-texto">Estás invitado</p></div> <!-- cambia aquí el texto del papel -->
-    <div class="frente"></div>
-    <div class="solapa"><div class="cara"></div><div class="dorso"></div></div>
     <button id="sello" type="button" aria-label="Romper el sello para abrir la invitación">
       <span class="mitad izq"><img src="assets/images/ornaments/sello.png" alt=""></span>
       <span class="mitad der"><img src="assets/images/ornaments/sello.png" alt=""></span>

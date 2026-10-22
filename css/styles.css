@@ -5,12 +5,6 @@ body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-weight:30
 body.bloqueado{overflow:hidden;height:100svh}
 img{max-width:100%;display:block}
 
-/* Marco de rosas (imagen: assets/images/ornaments/rosas-lirios.png). Se dibuja desde aquí, por eso no aparece en el HTML */
-.marco::before,.marco::after{content:"";position:fixed;top:0;bottom:0;width:clamp(56px,18vw,88px);background:url(../assets/images/ornaments/rosas-lirios.png) repeat-y left top/100% auto;z-index:5;pointer-events:none;animation:respira 6s ease-in-out infinite}
-.marco::before{left:-10px}
-.marco::after{right:-10px;transform:scaleX(-1);animation-delay:-3s}
-@keyframes respira{50%{filter:brightness(1.25) drop-shadow(0 0 8px rgba(255,80,80,.35))}}
-
 /* Mariposas: solo salen volando al romper el sello (las crea js/main.js) y desaparecen */
 #mariposas{position:fixed;inset:0;z-index:26;pointer-events:none;overflow:hidden}
 .mariposa{position:absolute;width:var(--t,34px);opacity:0;animation:salir var(--d,3.5s) cubic-bezier(.3,.6,.4,1) var(--r,0s) forwards}
@@ -42,19 +36,10 @@ img{max-width:100%;display:block}
 @keyframes brilla{50%{filter:drop-shadow(0 0 10px rgba(255,255,255,.9))}}
 #intro .nombre{font-size:clamp(40px,13vw,60px);animation:entrada 1.4s .2s ease both}
 #intro .apellidos,#intro .peq:first-of-type{animation:entrada 1.4s .1s ease both}
-#sobre{position:relative;width:min(80vw,330px);aspect-ratio:1.737;margin:34px 0 26px;perspective:1100px;animation:flotar 4s ease-in-out infinite;filter:drop-shadow(0 14px 26px rgba(255,215,130,.18))}
+#sobre{position:relative;width:min(80vw,330px);aspect-ratio:1.737;margin:34px 0 26px;background:url(../assets/images/ornaments/sobre.png) center/100% 100% no-repeat;animation:flotar 4s ease-in-out infinite;filter:drop-shadow(0 14px 26px rgba(255,215,130,.18))}
 #sobre>*{position:absolute}
-.interior{inset:1% 1.5% 2%;background:linear-gradient(#b9a06a,#e3d4ad);z-index:1}
-.frente,.cara{inset:0;background:url(../assets/images/ornaments/sobre.png) center/100% 100% no-repeat}
-.frente{clip-path:polygon(0.00% 3.00%,12.00% 15.33%,15.45% 22.02%,18.91% 28.37%,22.36% 34.38%,25.82% 40.07%,29.27% 45.41%,32.73% 50.42%,36.18% 55.10%,39.64% 59.44%,43.09% 63.45%,46.55% 67.12%,50.00% 71.11%,53.45% 67.12%,56.91% 63.45%,60.36% 59.44%,63.82% 55.10%,67.27% 50.42%,70.73% 45.41%,74.18% 40.07%,77.64% 34.38%,81.09% 28.37%,84.55% 22.02%,88.00% 15.33%,100.00% 3.00%,100.00% 100.00%,0.00% 100.00%);z-index:3}
-.solapa{inset:0;transform-origin:50% 0;transform-style:preserve-3d;z-index:4;transition:transform 1.1s .5s cubic-bezier(.55,0,.25,1),z-index 0s 1.05s}
-.cara,.dorso{position:absolute;backface-visibility:hidden;-webkit-backface-visibility:hidden;clip-path:polygon(0.00% 0.00%,100.00% 0.00%,100.00% 3.60%,88.00% 15.93%,84.55% 22.62%,81.09% 28.97%,77.64% 34.98%,74.18% 40.67%,70.73% 46.01%,67.27% 51.02%,63.82% 55.70%,60.36% 60.04%,56.91% 64.05%,53.45% 67.72%,50.00% 71.71%,46.55% 67.72%,43.09% 64.05%,39.64% 60.04%,36.18% 55.70%,32.73% 51.02%,29.27% 46.01%,25.82% 40.67%,22.36% 34.98%,18.91% 28.97%,15.45% 22.62%,12.00% 15.93%,0.00% 3.60%)}
-.dorso{inset:0;background:linear-gradient(#ae945a,#e6d8b3);transform:rotateY(180deg)}
-.carta{left:7%;right:7%;top:8%;height:96%;z-index:2;background:linear-gradient(#fffdf5,#f0e6cf);box-shadow:0 0 0 1px #d4ad4e inset,0 0 0 7px #f6eedb inset,0 0 0 8px #d9b866 inset;display:flex;justify-content:center;padding-top:13%;transition:transform 1.4s 1.3s cubic-bezier(.25,1.15,.4,1)}
-.carta-texto{font-family:var(--script);font-size:clamp(30px,9.5vw,42px);line-height:1;color:#8a6720;text-align:center}
-#sobre.abierto{animation:none}
-#sobre.abierto .solapa{transform:rotateX(180deg);z-index:1}
-#sobre.abierto .carta{transform:translateY(-50%) scale(1.06)}
+#sobre.encendido{animation:encender 2.2s ease-out forwards}
+@keyframes encender{40%{filter:drop-shadow(0 0 46px rgba(255,225,140,.95)) brightness(1.12)}100%{filter:drop-shadow(0 0 70px rgba(255,235,170,1)) brightness(1.25)}}
 #sello{left:41.83%;top:49.67%;width:16.34%;aspect-ratio:214/201;z-index:6;border:0;background:none;padding:0;cursor:pointer;animation:selloPulso 2.4s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
 #sello::after{content:"";position:absolute;inset:-20px;border-radius:50%}
 #sello:hover:not(.roto),#sello:focus-visible{filter:brightness(1.2)}
@@ -75,6 +60,17 @@ img{max-width:100%;display:block}
 .pulso{animation:latido 2.4s ease-in-out infinite}
 @keyframes latido{50%{opacity:.35}}
 
+/* Transición mágica: destellos y pantalla blanca */
+#brillos{position:fixed;inset:0;z-index:30;pointer-events:none;overflow:hidden}
+.brillo{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s) / -2);opacity:0;background:radial-gradient(circle,#fff 0,#ffe9a6 38%,rgba(255,220,120,0) 72%);clip-path:polygon(50% 0,59% 41%,100% 50%,59% 59%,50% 100%,41% 59%,0 50%,41% 41%);animation:estrella 1.1s ease-out forwards}
+@keyframes estrella{0%{transform:scale(0) rotate(0);opacity:0}35%{opacity:1}100%{transform:scale(1.5) rotate(120deg);opacity:0}}
+#destello{position:fixed;inset:0;z-index:40;background:#fff;display:grid;place-items:center;opacity:0;pointer-events:none}
+#destello.activo{animation:blanco 4.6s ease-in-out forwards}
+@keyframes blanco{0%{opacity:0}20%,70%{opacity:1}100%{opacity:0}}
+.destello-texto{font-family:var(--script);font-size:clamp(44px,14vw,64px);line-height:1.1;color:#b18425;text-align:center;padding:0 24px;opacity:0}
+#destello.activo .destello-texto{animation:textoMagia 3s .8s ease both}
+@keyframes textoMagia{0%{opacity:0;transform:scale(.92)}25%,75%{opacity:1;transform:none}100%{opacity:0}}
+
 /* 2. Portada */
 .portada{position:relative;height:100svh;min-height:560px;overflow:hidden}
 .portada>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:zoom 22s ease-in-out infinite alternate}
@@ -91,8 +87,8 @@ img{max-width:100%;display:block}
 /* Marco dorado del nombre (aparece cuando se abre la invitación) */
 .nombre-marco{position:relative;width:min(82vw,340px);aspect-ratio:3.5;margin:0 auto 12px;display:grid;place-items:center}
 .nombre-marco img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;animation:marcoEntra 1.6s ease both,destello 4s 1.6s ease-in-out infinite;animation-play-state:paused}
-.nombre-marco .nombre{position:relative;font-size:clamp(46px,15vw,62px);padding-bottom:.1em;animation:entrada 1.4s .5s ease both;animation-play-state:paused}
-body.abierta .nombre-marco img,body.abierta .nombre-marco .nombre{animation-play-state:running}
+.nombre-marco .nombre{position:absolute;left:0;right:0;top:57.8%;height:0;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-size:clamp(44px,14.5vw,60px);line-height:1;animation:entrada 1.4s .5s ease both;animation-play-state:paused}
+body.abierta .nombre-marco img,body.abierta .nombre-marco .nombre{position:absolute;left:0;right:0;top:57.8%;height:0;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-size:clamp(44px,14.5vw,60px);line-height:1;animation:entrada 1.4s .5s ease both;animation-play-state:paused}
 
 /* Secciones */
 .bloque{padding:64px 54px 24px;display:flex;flex-direction:column;align-items:center}

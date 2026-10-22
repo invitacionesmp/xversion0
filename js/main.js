@@ -3,23 +3,24 @@ const audio = $('#musica');
 const sobre = $('#sobre');
 let abierta = false;
 
-/* 1. Romper el sello: abre el sobre, suelta las mariposas, inicia la música y pasa a la invitación */
-const sello = $('#sello');
+/* 1. Romper el sello → mariposas → destellos → pantalla blanca con sonido mágico → invitación */
+const sello = $('#sello'), magia = $('#magia'), flash = $('#destello');
 function romper() {
   if (abierta) return;
   abierta = true;
   sello.classList.add('roto');
+  sobre.classList.add('encendido');
   chispas();
   audio.volume = 0.8;
   audio.play().catch(() => {}); // si falta el mp3 o el navegador lo bloquea, la página sigue funcionando
-  setTimeout(() => { sobre.classList.add('abierto'); soltarMariposas(); }, 650);
-  setTimeout(() => {
-    $('#intro').classList.add('oculto'); // el marco dorado desaparece con la pantalla del sobre
-    document.body.classList.remove('bloqueado');
-    document.body.classList.add('abierta');
-    window.scrollTo(0, 0);
-  }, 5600);
-  setTimeout(() => $('#intro').remove(), 7000);
+  magia.muted = true; // se "desbloquea" con este toque para poder sonar más adelante
+  magia.play().then(() => { magia.pause(); magia.currentTime = 0; magia.muted = false; }).catch(() => { magia.muted = false; });
+  setTimeout(soltarMariposas, 650);
+  setTimeout(destellos, 1200);
+  setTimeout(() => { flash.classList.add('activo'); magia.play().catch(() => {}); }, 2200); // empieza el blanco y el sonido
+  setTimeout(() => { $('#intro').remove(); document.body.classList.remove('bloqueado'); window.scrollTo(0, 0); }, 3300); // ya todo blanco: se cambia de pantalla
+  setTimeout(() => document.body.classList.add('abierta'), 5400); // el blanco se disipa y aparece el nombre
+  setTimeout(() => { flash.remove(); $('#brillos').remove(); $('#mariposas').remove(); }, 7200);
 }
 sello.addEventListener('click', romper);
 
@@ -31,6 +32,17 @@ function chispas() {
     c.style.setProperty('--dy', Math.sin(a) * d + 'px');
     sello.appendChild(c);
     setTimeout(() => c.remove(), 900);
+  }
+}
+
+/* Destellos: estrellas doradas que aparecen por toda la pantalla antes del blanco */
+function destellos() {
+  const caja = $('#brillos');
+  for (let i = 0; i < 34; i++) {
+    const b = document.createElement('i');
+    b.className = 'brillo';
+    b.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;--s:${14 + Math.random() * 34}px;animation-delay:${Math.random() * 0.9}s`;
+    caja.appendChild(b);
   }
 }
 

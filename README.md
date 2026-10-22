@@ -8,8 +8,8 @@ Abre `index.html` en el navegador (mejor desde un servidor local o hosting, para
 |---|---|---|
 | Foto de portada | `assets/images/hero/portada.jpg` | 900 x 1400 px, vertical |
 | Foto de cierre | `assets/images/gallery/foto-2.jpg` | 900 x 1400 px, vertical |
+| Sonido mágico de la transición | `assets/audio/magia.mp3` | MP3 corto (unos 4 s) |
 | Música | `assets/audio/cancion.mp3` | MP3, menos de 5 MB |
-| Rosas del marco (se repite a los lados) | `assets/images/ornaments/rosas-lirios.png` | PNG transparente, vertical |
 | Mariposas voladoras | `assets/images/ornaments/mariposa-bn.png` y `mariposa-morada.png` | PNG transparente |
 | Sobre (sin sello) | `assets/images/ornaments/sobre.png` | PNG transparente |
 | Sello de cera (separado) | `assets/images/ornaments/sello.png` | PNG transparente |
@@ -23,13 +23,13 @@ Los archivos actuales son de ejemplo: reemplázalos conservando el mismo nombre.
 
 ## Qué editar en `index.html`
 
-- Texto del papel que sale del sobre: `<p class="carta-texto">` dentro de `.carta`.
+- Texto de la pantalla blanca de la transición: `<p class="destello-texto">` dentro de `#destello`.
 - Nombre, apellidos, padres, padrinos, lugares y horarios (textos).
 - Fecha de la cuenta regresiva: atributo `data-fecha` de `#cuenta`.
 - Botones "Ver ubicación": enlaces de Google Maps.
 - Botones "Recomendar" y "Confirmar": cambia el número en `wa.me/549XXXXXXXXXX`.
 
-Las rosas se cargan desde `css/styles.css` (clase `.marco`) y las mariposas desde `js/main.js`, por eso no aparecen en el HTML. Las mariposas solo salen al romper el sello; el marco dorado solo se ve en la pantalla del sobre.
+Las mariposas y los destellos los crea `js/main.js`, por eso no aparecen en el HTML. Las mariposas solo salen al romper el sello; el marco dorado solo se ve en la pantalla del sobre.
 
 ## Archivos
 
