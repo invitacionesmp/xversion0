@@ -1,0 +1,134 @@
+:root{--bg:#000;--fg:#f4efe8;--tenue:#bdb7ae;--plata:linear-gradient(135deg,#f5f5f5,#9a9a9a 45%,#ececec 60%,#7d7d7d);--script:"Mrs Saint Delafield","Pinyon Script",cursive;--nombre:"Pinyon Script",cursive;--sans:"Montserrat",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-weight:300;text-align:center;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.bloqueado{overflow:hidden;height:100svh}
+img{max-width:100%;display:block}
+
+/* Marco de rosas (imagen: assets/images/ornaments/rosas-lirios.png). Se dibuja desde aquí, por eso no aparece en el HTML */
+.marco::before,.marco::after{content:"";position:fixed;top:0;bottom:0;width:clamp(56px,18vw,88px);background:url(../assets/images/ornaments/rosas-lirios.png) repeat-y left top/100% auto;z-index:5;pointer-events:none;animation:respira 6s ease-in-out infinite}
+.marco::before{left:-10px}
+.marco::after{right:-10px;transform:scaleX(-1);animation-delay:-3s}
+@keyframes respira{50%{filter:brightness(1.25) drop-shadow(0 0 8px rgba(255,80,80,.35))}}
+
+/* Mariposas: solo salen volando al romper el sello (las crea js/main.js) y desaparecen */
+#mariposas{position:fixed;inset:0;z-index:26;pointer-events:none;overflow:hidden}
+.mariposa{position:absolute;width:var(--t,34px);opacity:0;animation:salir var(--d,3.5s) cubic-bezier(.3,.6,.4,1) var(--r,0s) forwards}
+.mariposa img{width:100%;animation:aleteo .38s ease-in-out var(--a,0s) infinite alternate;filter:drop-shadow(0 0 7px rgba(255,255,255,.4))}
+@keyframes aleteo{to{transform:scaleX(.4)}}
+@keyframes salir{0%{transform:translate(0,0) scale(.3) rotate(0);opacity:0}12%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.15) rotate(var(--rot));opacity:0}}
+
+/* Tipografía */
+.nombre{font-family:var(--nombre);font-weight:400;font-size:clamp(46px,16vw,76px);line-height:1.05}
+.nombre.grande{font-size:clamp(64px,22vw,104px)}
+.script{font-family:var(--script);font-weight:400;font-size:clamp(34px,10vw,48px);line-height:1.1;margin:28px 0 12px}
+.lugar{margin:10px 0 2px}
+.peq{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--tenue)}
+.apellidos,.titulo-caps{font-size:15px;letter-spacing:.3em;text-transform:uppercase}
+.texto{font-size:13px;line-height:1.9;letter-spacing:.06em;max-width:300px;margin:0 auto 18px}
+.nombres{text-transform:uppercase;letter-spacing:.1em;font-size:12px}
+.amp{font-family:var(--script);font-size:26px;text-transform:none}
+.hora{font-size:14px;letter-spacing:.16em;margin-bottom:14px}
+.pregunta{text-transform:uppercase;font-size:12px;letter-spacing:.14em}
+
+/* 1. Sobre: imágenes en assets/images/ornaments (sobre.png, sello.png, marco-intro.png) */
+#intro{position:fixed;inset:0;z-index:20;background:radial-gradient(circle at 50% 58%,#1c1810,#000 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:0 70px;transition:opacity 1.2s ease,transform 1.2s ease}
+#intro.oculto{opacity:0;transform:scale(1.06);pointer-events:none}
+/* Marco dorado: SOLO en esta pantalla, desaparece junto con el sobre */
+#intro::before{content:"";position:absolute;inset:6px;pointer-events:none;border-style:solid;border-color:transparent;border-width:64px 66px;border-image-source:url(../assets/images/ornaments/marco-intro.png);border-image-slice:217 226;border-image-repeat:stretch;animation:marcoEntra 1.8s ease both,destello 4s 1.8s ease-in-out infinite}
+@keyframes marcoEntra{from{opacity:0;transform:scale(1.05)}}
+@keyframes destello{50%{filter:brightness(1.3) drop-shadow(0 0 9px rgba(255,205,110,.55))}}
+.tiara{width:70px;animation:entrada 1.4s ease both,brilla 3s 1.4s ease-in-out infinite}
+@keyframes brilla{50%{filter:drop-shadow(0 0 10px rgba(255,255,255,.9))}}
+#intro .nombre{font-size:clamp(40px,13vw,60px);animation:entrada 1.4s .2s ease both}
+#intro .apellidos,#intro .peq:first-of-type{animation:entrada 1.4s .1s ease both}
+#sobre{position:relative;width:min(80vw,330px);aspect-ratio:1.737;margin:34px 0 26px;perspective:1100px;animation:flotar 4s ease-in-out infinite;filter:drop-shadow(0 14px 26px rgba(255,215,130,.18))}
+#sobre>*{position:absolute}
+.interior{inset:1% 1.5% 2%;background:linear-gradient(#b9a06a,#e3d4ad);z-index:1}
+.frente,.cara{inset:0;background:url(../assets/images/ornaments/sobre.png) center/100% 100% no-repeat}
+.frente{clip-path:polygon(0.00% 3.00%,12.00% 15.33%,15.45% 22.02%,18.91% 28.37%,22.36% 34.38%,25.82% 40.07%,29.27% 45.41%,32.73% 50.42%,36.18% 55.10%,39.64% 59.44%,43.09% 63.45%,46.55% 67.12%,50.00% 71.11%,53.45% 67.12%,56.91% 63.45%,60.36% 59.44%,63.82% 55.10%,67.27% 50.42%,70.73% 45.41%,74.18% 40.07%,77.64% 34.38%,81.09% 28.37%,84.55% 22.02%,88.00% 15.33%,100.00% 3.00%,100.00% 100.00%,0.00% 100.00%);z-index:3}
+.solapa{inset:0;transform-origin:50% 0;transform-style:preserve-3d;z-index:4;transition:transform 1.1s .5s cubic-bezier(.55,0,.25,1),z-index 0s 1.05s}
+.cara,.dorso{position:absolute;backface-visibility:hidden;-webkit-backface-visibility:hidden;clip-path:polygon(0.00% 0.00%,100.00% 0.00%,100.00% 3.60%,88.00% 15.93%,84.55% 22.62%,81.09% 28.97%,77.64% 34.98%,74.18% 40.67%,70.73% 46.01%,67.27% 51.02%,63.82% 55.70%,60.36% 60.04%,56.91% 64.05%,53.45% 67.72%,50.00% 71.71%,46.55% 67.72%,43.09% 64.05%,39.64% 60.04%,36.18% 55.70%,32.73% 51.02%,29.27% 46.01%,25.82% 40.67%,22.36% 34.98%,18.91% 28.97%,15.45% 22.62%,12.00% 15.93%,0.00% 3.60%)}
+.dorso{inset:0;background:linear-gradient(#ae945a,#e6d8b3);transform:rotateY(180deg)}
+.carta{left:7%;right:7%;top:8%;height:96%;z-index:2;background:linear-gradient(#fffdf5,#f0e6cf);box-shadow:0 0 0 1px #d4ad4e inset,0 0 0 7px #f6eedb inset,0 0 0 8px #d9b866 inset;display:flex;justify-content:center;padding-top:13%;transition:transform 1.4s 1.3s cubic-bezier(.25,1.15,.4,1)}
+.carta-texto{font-family:var(--script);font-size:clamp(30px,9.5vw,42px);line-height:1;color:#8a6720;text-align:center}
+#sobre.abierto{animation:none}
+#sobre.abierto .solapa{transform:rotateX(180deg);z-index:1}
+#sobre.abierto .carta{transform:translateY(-50%) scale(1.06)}
+#sello{left:41.83%;top:49.67%;width:16.34%;aspect-ratio:214/201;z-index:6;border:0;background:none;padding:0;cursor:pointer;animation:selloPulso 2.4s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+#sello::after{content:"";position:absolute;inset:-20px;border-radius:50%}
+#sello:hover:not(.roto),#sello:focus-visible{filter:brightness(1.2)}
+.mitad{position:absolute;inset:0;pointer-events:none}
+.mitad img{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.izq{clip-path:polygon(0 0,53% 0,45% 20%,55% 38%,46% 60%,54% 80%,49% 100%,0 100%)}
+.der{clip-path:polygon(53% 0,100% 0,100% 100%,49% 100%,54% 80%,46% 60%,55% 38%,45% 20%)}
+#sello.roto{animation:none;pointer-events:none}
+#sello.roto .izq{animation:romperIzq 1s cubic-bezier(.5,0,.9,.6) forwards}
+#sello.roto .der{animation:romperDer 1s cubic-bezier(.5,0,.9,.6) forwards}
+@keyframes romperIzq{25%{transform:translate(-5px,-4px) rotate(-6deg)}100%{transform:translate(-38px,130px) rotate(-45deg);opacity:0}}
+@keyframes romperDer{25%{transform:translate(5px,-4px) rotate(6deg)}100%{transform:translate(38px,130px) rotate(45deg);opacity:0}}
+.chispa{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:#f7dc86;box-shadow:0 0 9px #ffd35c;pointer-events:none;animation:chispa .9s ease-out forwards}
+@keyframes chispa{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+@keyframes selloPulso{50%{transform:scale(1.09);filter:drop-shadow(0 0 12px rgba(255,215,110,.9))}}
+@keyframes flotar{50%{transform:translateY(-9px)}}
+@keyframes entrada{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pulso{animation:latido 2.4s ease-in-out infinite}
+@keyframes latido{50%{opacity:.35}}
+
+/* 2. Portada */
+.portada{position:relative;height:100svh;min-height:560px;overflow:hidden}
+.portada>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:zoom 22s ease-in-out infinite alternate}
+@keyframes zoom{to{transform:scale(1.12)}}
+.portada::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 38%,rgba(0,0,0,.94) 78%,#000)}
+.portada-texto{position:absolute;left:0;right:0;bottom:7svh;z-index:2;padding:0 44px}
+.portada-texto .titulo-caps{margin:2px 0 14px}
+.player{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px auto 0;max-width:230px}
+#play{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--fg);background:none;cursor:pointer;display:grid;place-items:center}
+#play span{width:0;height:0;border-left:11px solid var(--fg);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+#play[aria-pressed=true] span{width:11px;height:13px;border:0;margin:0;border-left:3px solid var(--fg);border-right:3px solid var(--fg)}
+#progreso{flex:1;accent-color:#fff;height:2px}
+
+/* Marco dorado del nombre (aparece cuando se abre la invitación) */
+.nombre-marco{position:relative;width:min(82vw,340px);aspect-ratio:3.5;margin:0 auto 12px;display:grid;place-items:center}
+.nombre-marco img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;animation:marcoEntra 1.6s ease both,destello 4s 1.6s ease-in-out infinite;animation-play-state:paused}
+.nombre-marco .nombre{position:relative;font-size:clamp(46px,15vw,62px);padding-bottom:.1em;animation:entrada 1.4s .5s ease both;animation-play-state:paused}
+body.abierta .nombre-marco img,body.abierta .nombre-marco .nombre{animation-play-state:running}
+
+/* Secciones */
+.bloque{padding:64px 54px 24px;display:flex;flex-direction:column;align-items:center}
+.divisor{width:150px;margin:6px auto 0;opacity:.8}
+.icono{width:46px;margin:34px auto 6px;opacity:.95}
+.fecha .mes{font-family:var(--nombre);font-weight:400;font-size:clamp(44px,14vw,60px)}
+.dia-fila{display:flex;align-items:center;gap:14px;margin:4px 0 6px}
+.dia-semana,.anio{font-size:11px;letter-spacing:.24em;text-transform:uppercase;border-top:1px solid var(--fg);border-bottom:1px solid var(--fg);padding:5px 8px}
+.dia{font-family:var(--nombre);font-size:clamp(72px,24vw,104px);line-height:1;background:var(--plata);-webkit-background-clip:text;background-clip:text;color:transparent}
+#cuenta{display:flex;align-items:flex-start;gap:8px;margin-top:4px}
+#cuenta div{display:flex;flex-direction:column;min-width:48px}
+#cuenta b{font-family:var(--nombre);font-weight:400;font-size:38px;line-height:1}
+#cuenta small{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--tenue);margin-top:4px}
+#cuenta i{font-style:normal;font-size:30px;line-height:1.1}
+
+/* Botones plateados animados */
+.boton{display:inline-block;margin:10px 0 6px;padding:12px 34px;font-size:12px;font-weight:400;letter-spacing:.16em;color:#0d0d0d;text-decoration:none;background:linear-gradient(110deg,#8d8d8d,#fff 22%,#b9b9b9 42%,#fff 60%,#8f8f8f 80%,#f1f1f1);background-size:260% 100%;border-radius:999px;box-shadow:0 0 0 1px rgba(255,255,255,.7) inset,0 0 14px rgba(255,255,255,.3);position:relative;overflow:hidden;cursor:pointer;transition:transform .3s cubic-bezier(.2,1.5,.4,1),box-shadow .3s;animation:metal 5s linear infinite,resplandor 2.8s ease-in-out infinite}
+.boton::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.95),transparent);transform:skewX(-20deg);animation:brillo 2.6s ease-in-out infinite}
+.reveal.visible .boton{animation:aparece .9s .5s cubic-bezier(.2,1.5,.4,1) backwards,metal 5s linear infinite,resplandor 2.8s 1.4s ease-in-out infinite}
+.boton:hover,.boton:focus-visible{transform:translateY(-3px) scale(1.08);box-shadow:0 0 0 1px #fff inset,0 0 30px rgba(255,255,255,.8)}
+.boton:active{transform:scale(.95)}
+.onda{position:absolute;border-radius:50%;background:rgba(0,0,0,.3);transform:scale(0);animation:onda .6s ease-out forwards;pointer-events:none}
+@keyframes metal{to{background-position:-260% 0}}
+@keyframes resplandor{50%{box-shadow:0 0 0 1px rgba(255,255,255,.9) inset,0 0 26px rgba(255,255,255,.65)}}
+@keyframes brillo{0%,45%{left:-70%}100%{left:140%}}
+@keyframes aparece{from{opacity:0;transform:scale(.4) translateY(14px)}}
+@keyframes onda{to{transform:scale(4);opacity:0}}
+
+/* Cierre */
+.cierre{position:relative;margin-top:56px;min-height:90svh;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.cierre img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cierre::after{content:"";position:absolute;inset:0;background:linear-gradient(#000,transparent 30%,transparent 55%,#000)}
+.cierre-texto{position:relative;z-index:2;padding:0 54px 12svh}
+
+/* Aparición al hacer scroll */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}#mariposas{display:none}}

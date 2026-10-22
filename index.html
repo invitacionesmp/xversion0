@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mis XV Años</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Mrs+Saint+Delafield&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bloqueado">
+<div class="marco" aria-hidden="true"></div>
+<div id="mariposas" aria-hidden="true"></div>
+<audio id="musica" src="assets/audio/cancion.mp3" loop preload="auto"></audio>
+
+<!-- 1. SOBRE (el marco dorado de esta pantalla se dibuja desde css/styles.css, #intro::before) -->
+<section id="intro">
+  <img class="tiara" src="assets/images/ornaments/tiara.png" alt="">
+  <p class="peq">Mis quince años</p>
+  <h1 class="nombre">Ariadna Raquel</h1>
+  <p class="apellidos">López</p>
+  <div id="sobre">
+    <div class="interior"></div>
+    <div class="carta"><p class="carta-texto">Estás invitado</p></div> <!-- cambia aquí el texto del papel -->
+    <div class="frente"></div>
+    <div class="solapa"><div class="cara"></div><div class="dorso"></div></div>
+    <button id="sello" type="button" aria-label="Romper el sello para abrir la invitación">
+      <span class="mitad izq"><img src="assets/images/ornaments/sello.png" alt=""></span>
+      <span class="mitad der"><img src="assets/images/ornaments/sello.png" alt=""></span>
+    </button>
+  </div>
+  <p class="peq pulso">Toca el sello para abrirlo</p>
+</section>
+
+<main id="main">
+  <!-- 2. PORTADA -->
+  <section class="portada">
+    <img src="assets/images/hero/portada.jpg" alt="Foto de la quinceañera">
+    <div class="portada-texto">
+      <div class="nombre-marco"><img src="assets/images/ornaments/marco-nombre.png" alt=""><h2 class="nombre">Ariadna</h2></div>
+      <p class="titulo-caps">Mis quince años</p>
+      <p class="peq">Presiona play para reproducir la canción</p>
+      <div class="player">
+        <button id="play" aria-label="Reproducir o pausar" aria-pressed="false"><span></span></button>
+        <input id="progreso" type="range" min="0" max="100" value="0" aria-label="Progreso de la canción">
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MENSAJE -->
+  <section class="bloque reveal">
+    <p class="texto">Me haría mucha ilusión que me acompañes a celebrar mis XV años. Es un momento muy especial para mí y me encantaría compartirlo con las personas que más quiero.</p>
+    <p class="texto">Tu presencia haría que esta noche sea aún más inolvidable.</p>
+    <img class="divisor" src="assets/images/ornaments/divisor.svg" alt="">
+  </section>
+
+  <!-- 4. PADRES Y PADRINOS -->
+  <section class="bloque reveal">
+    <h3 class="script">En compañía de mis padres</h3>
+    <p class="texto nombres">Nombre de la madre<br>Nombre del padre<br></p>
+    <h3 class="script">Y mis padrinos</h3>
+    <p class="texto nombres">Nombre de la madrina<br>Nombre del padrino<br></p>
+  </section>
+
+  <!-- 5. FECHA Y CUENTA REGRESIVA -->
+  <section class="bloque reveal fecha">
+    <h3 class="mes">Marzo</h3>
+    <div class="dia-fila"><span class="dia-semana">Sábado</span><span class="dia">20</span><span class="anio">2027</span></div>
+    <h3 class="script">Faltan</h3>
+    <div id="cuenta" data-fecha="2027-03-20T16:00:00" aria-live="off">
+      <div><b id="c-d">0</b><small>días</small></div><i>:</i>
+      <div><b id="c-h">00</b><small>horas</small></div><i>:</i>
+      <div><b id="c-m">00</b><small>minutos</small></div><i>:</i>
+      <div><b id="c-s">00</b><small>segundos</small></div>
+    </div>
+  </section>
+
+  <!-- 6. LUGARES -->
+  <section class="bloque reveal">
+    <img class="icono" src="assets/images/icons/iglesia.png" alt="">
+    <h3 class="script lugar">Parroquia Nombre</h3>
+    <p class="hora">4:00 PM</p>
+    <a class="boton" href="https://maps.google.com/?q=Parroquia" target="_blank" rel="noopener">Ver ubicación</a>
+
+    <img class="icono" src="assets/images/icons/ubicacion.png" alt="">
+    <h3 class="script lugar">Salón de fiestas</h3>
+    <p class="hora">5:30 PM</p>
+    <a class="boton" href="https://maps.google.com/?q=Salon" target="_blank" rel="noopener">Ver ubicación</a>
+  </section>
+
+  <!-- 7. DRESS CODE -->
+  <section class="bloque reveal">
+    <img class="icono" src="assets/images/icons/dresscode.png" alt="">
+    <h3 class="script lugar">Dress code</h3>
+    <p class="titulo-caps">Elegante</p>
+  </section>
+
+  <!-- 8. PLAYLIST -->
+  <section class="bloque reveal">
+    <img class="icono" src="assets/images/icons/musica.png" alt="">
+    <p class="texto pregunta">¿Qué canción no puede faltar en la playlist?</p>
+    <a class="boton" href="https://wa.me/5490000000000?text=Mi%20canci%C3%B3n%20para%20la%20playlist%3A%20" target="_blank" rel="noopener">Recomendar</a>
+  </section>
+
+  <!-- 9. FOTO Y CONFIRMACIÓN -->
+  <section class="cierre reveal">
+    <img src="assets/images/gallery/foto-2.jpg" alt="Foto de la quinceañera">
+    <div class="cierre-texto">
+      <h3 class="script lugar">Confirmación de asistencia</h3>
+      <a class="boton" href="https://wa.me/5490000000000?text=Confirmo%20mi%20asistencia" target="_blank" rel="noopener">Confirmar</a>
+    </div>
+  </section>
+</main>
+<script src="js/main.js"></script>
+</body>
+</html>
